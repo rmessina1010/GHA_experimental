@@ -2,7 +2,7 @@ name: Initial Tests
 
 on:
   push:  # Specifies the action  that will trigger  this job
-    branches: [main]
+    branches: [master]
 
 jobs:
   say-hello:
