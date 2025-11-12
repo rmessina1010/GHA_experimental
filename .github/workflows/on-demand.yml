@@ -1,0 +1,12 @@
+name: Hello World Workflow        # Gives the workflow a readable name (shown in the GitHub Actions tab)
+
+on:                               # Defines what events trigger this workflow
+  workflow_dispatch:              # 'workflow_dispatch' means it runs manually (on demand) from the GitHub UI
+
+jobs:                             # A workflow is made of one or more jobs
+  say_hello:                      # This names a job, such as 'say_hello'
+    runs-on: ubuntu-latest        # Specifies the virtual machine (runner) where the job will run
+
+    steps:                        # Jobs contain steps that run commands or actions
+      - name: Print Hello World   # Optional human-readable name for this step
+        run: echo "Hello, world!" # Runs a simple shell command that prints "Hello, world!"
