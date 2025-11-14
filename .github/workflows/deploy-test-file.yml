@@ -1,0 +1,34 @@
+name: Deploy Test Payload
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Setup Node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Upload to FTP (only runs if previous steps succeed)
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.URL }}
+          username: ${{ secrets.ACC }}
+          password: ${{ secrets.PASS }}
+          protocol: ftp
+          local-dir: ./
+          server-dir: ${{ secrets.PATH }}
+          # Upload only specific files/directories
+          include: |
+            testpayload.txt
+          log-level: verbose

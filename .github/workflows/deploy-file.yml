@@ -1,0 +1,45 @@
+name: Manual FTP Deploy (theory)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Setup Node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      # Build project
+      - name: Build Project
+        run: yarn build
+
+      # Upload to FTP (only runs if previous steps succeed)
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.URL }}
+          username: ${{ secrets.ACC }}
+          password: ${{ secrets.PASS }}
+          protocol: ftp
+          local-dir: build
+          server-dir: ${{ secrets.PATH }}
+          # Upload only specific files/directories
+          include: |
+            static/**
+            images/**
+            index.html
+            manifest.json
+          log-level: verbose
