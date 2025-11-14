@@ -10,3 +10,7 @@ jobs:
     steps:
       - name: Print Hello World
         run: echo "Hello, World!" # The command to execute
+      - name: Check server URL
+        run: |
+          echo "Server URL: ${{ github.server_url }}"
+          echo "API URL: ${{ github.api_url }}"
