@@ -20,7 +20,7 @@ jobs:
 
       # Upload to FTP (only runs if previous steps succeed)
       - name: Deploy to FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@bb50fc5e5fbf11db0dfb88fc827273e1922b4f96
         with:
           server: ${{ secrets.URL }}
           username: ${{ secrets.ACC }}
