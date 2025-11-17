@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
+          # cache: 'npm' # doesnt seem to work
 
       # Upload to FTP (only runs if previous steps succeed)
       - name: Deploy to FTP
